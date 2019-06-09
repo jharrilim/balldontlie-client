@@ -3,7 +3,7 @@
 [![Build Status]](https://dev.azure.com/josephharrisonlim/josephharrisonlim/_build/latest?definitionId=2&branchName=master)
 [![NPM Badge]](https://www.npmjs.com/package/@jharrilim/balldontlie-client)
 
-Javascript client for https://github.com/ynnadkrap/balldontlie
+Javascript client for [Balldontlie](https://github.com/ynnadkrap/balldontlie). API Docs found [here](https://jharrilim.github.io/balldontlie-client).
 
 ![Rasheed Wallace - Ball Dont Lie](https://media.giphy.com/media/Jm2hosNfVeNjy/giphy.gif)
 
