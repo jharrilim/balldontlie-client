@@ -16,7 +16,7 @@ export class V1Client {
         const baseUrl = 'https://www.balldontlie.io/api/v1';
 
         if (config) {
-            config.baseURL = config.baseURL ||  baseUrl;
+            config.baseURL = config.baseURL || baseUrl;
             this._axios = Axios.create(config);
         }
         else {
@@ -34,7 +34,7 @@ export class V1Client {
      * @param {number} [page=0] The page to start paginating from. Defaults to 0.
      * @param {number} [amountPerPage=25] The amount of players per page. Defaults to 25.
      * @param {string} [search] A filter for player names. Searches first and last name. Optional.
-     * @yields {Promise<Player[]>} A promise containing a list of players
+     * @yields {Promise<Player[]>} A promise containing a list of players.
      * @memberof V1Client
      */
     async *players(page: number = 0, amountPerPage: number = 25, search?: string) {
@@ -75,19 +75,20 @@ export class V1Client {
      * 
      * @param {number} [page=0] The page to start paginating from. Defaults to 0.
      * @param {number} [amountPerPage=30] The amount of teams per page. Defaults to 30 (The current amount of teams in the NBA).
+     * @yields {Promise<Team[]>} A promise containing a list of teams.
      * @memberof V1Client
      */
     async *teams(page: number = 0, amountPerPage: number = 30) {
         let totalPages = 0;
         do {
-            const resp = await this._axios.get<BallDontLieResponse<Team>>('teams', {
+            const { data: { data, meta } } = await this._axios.get<BallDontLieResponse<Team>>('teams', {
                 params: {
                     page,
                     per_page: amountPerPage
                 }
             });
-            yield resp;
-            totalPages = resp.data.meta.total_pages;
+            yield data;
+            totalPages = meta.total_pages;
         } while (page <= totalPages)
     }
 
