@@ -5,7 +5,7 @@
   "homepage": "https://github.com/jharrilim/balldontlie-client",
   "readme": "https://github.com/jharrilim/balldontlie-client/blob/master/README.md",
   "main": "dist/index.js",
-  "types": "dist.index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest"
