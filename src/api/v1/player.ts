@@ -1,3 +1,11 @@
+import { Team } from "./team";
+
+/**
+ * A player from the NBA.
+ *
+ * @export
+ * @interface Player
+ */
 export interface Player {
     id:             number;
     first_name:     string;
@@ -7,14 +15,4 @@ export interface Player {
     height_inches?: number;
     weight_pounds?: number;
     team:           Team;
-}
-
-export interface Team {
-    id:           number;
-    abbreviation: string;
-    city:         string;
-    conference:   string;
-    division:     string;
-    full_name:    string;
-    name:         string;
 }
