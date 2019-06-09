@@ -2,8 +2,12 @@
   "name": "balldontlie-client",
   "version": "0.1.0",
   "description": "js client for balldontlie api",
+  "homepage": "https://github.com/jharrilim/balldontlie-client",
+  "readme": "https://github.com/jharrilim/balldontlie-client/blob/master/README.md",
   "main": "dist/index.js",
+  "types": "dist.index.d.ts",
   "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "keywords": [
@@ -24,5 +28,13 @@
   },
   "dependencies": {
     "axios": "^0.19.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }
