@@ -10,10 +10,10 @@ export namespace BallDontLie {
      * API V1 Client for balldontlie.io.
      *
      * @export
-     * @param {AxiosRequestConfig} axiosConfig Axios configuration options for internal axios instance
+     * @param {AxiosRequestConfig} axiosConfig Axios configuration options for internal axios instance.
      * @returns {V1Client}
      */
-    export function v1(axiosConfig: AxiosRequestConfig): V1Client {
+    export function v1(axiosConfig?: AxiosRequestConfig): V1Client {
         return new V1Client(axiosConfig);
     }
 }
