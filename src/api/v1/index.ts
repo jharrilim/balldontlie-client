@@ -79,17 +79,17 @@ export class V1Client {
      * @memberof V1Client
      */
     async *teams(page: number = 0, amountPerPage: number = 30) {
-        let totalPages = 0;
+        let currentPage = page;
         do {
-            const { data: { data, meta } } = await this._axios.get<BallDontLieResponse<Team>>('teams', {
+            const { data: { data, meta } } = await this._axios.get<BallDontLieResponse<Team[]>>('teams', {
                 params: {
                     page,
                     per_page: amountPerPage
                 }
             });
             yield data;
-            totalPages = meta.total_pages;
-        } while (page <= totalPages)
+            currentPage = meta.next_page;
+        } while (currentPage)
     }
 
     /**

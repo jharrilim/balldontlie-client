@@ -18,4 +18,6 @@ export namespace BallDontLie {
     }
 }
 
+export { Team } from './api/v1/team';
+export { Player } from './api/v1/player';
 export default BallDontLie;
