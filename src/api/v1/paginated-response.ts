@@ -5,10 +5,10 @@
  * for APIs that return lists of data.
  *
  * @export
- * @interface BallDontLieResponse
+ * @interface PaginatedResponse
  * @template T
  */
-export interface BallDontLieResponse<T> {
+export interface PaginatedResponse<T> {
     data: T;
     meta: Meta;
 }

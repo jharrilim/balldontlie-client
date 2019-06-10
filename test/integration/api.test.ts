@@ -15,6 +15,22 @@ describe('BallDontLie API Test', () => {
             expect(player2).toBeInstanceOf(Array);
             expect(player2.length).toBe(3);
         });
+
+        it('can get player by id', async () => {
+            const api = BallDontLie.v1();
+            const players = await api.players(5, 1).next();
+
+            expect(players.value).toBeDefined();
+            expect(players.value.length).toBe(1);
+
+            const id = players.value[0].id;
+            expect(id).toBeDefined();
+
+            const player = await api.player(id);
+
+            expect(player).toBeDefined();
+            expect(player.id).toBe(id);
+        });
     });
 
     describe('Teams', () => {
@@ -26,9 +42,26 @@ describe('BallDontLie API Test', () => {
             for await (const teams of api.teams()) {
                 totalTeams = teams;
                 count++;
-                if(count >= limit) throw Error('Exceeded expected amount of calls');
+                if (count >= limit) throw Error('Exceeded expected amount of calls');
             }
             expect(totalTeams.length).toBeGreaterThanOrEqual(30);
+        });
+
+        it('can get team by id', async () => {
+            const api = BallDontLie.v1();
+
+            const t = (await api.teams(0, 1).next()).value;
+
+            expect(t).toBeDefined();
+            expect(t.length).toBe(1);
+
+            const id = t[0].id;
+            expect(id).toBeDefined();
+
+            const team = await api.team(id);
+
+            expect(team).toBeDefined();
+            expect(team.id).toBe(id);
         });
     });
 });

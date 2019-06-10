@@ -1,7 +1,5 @@
-
-
-import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { BallDontLieResponse } from "./response";
+import Axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import { PaginatedResponse } from "./paginated-response";
 import { Player } from "./player";
 import { Team } from "./team";
 
@@ -41,7 +39,7 @@ export class V1Client {
         let currentPage = page;
         do {
             const { data: { data, meta } } = await this._axios
-                .get<BallDontLieResponse<Player[]>>('players', {
+                .get<PaginatedResponse<Player[]>>('players', {
                     params: {
                         page: page++,
                         per_page: amountPerPage,
@@ -63,8 +61,11 @@ export class V1Client {
      * @memberof V1Client
      */
     async player(id: number) {
-        const { data: { data } } = await this._axios
-            .get<BallDontLieResponse<Player>>(`players/${id.toString()}`);
+        if(typeof id !== 'number')
+            throw new Error('Player ID must be a number.');
+
+        const { data } = await this._axios
+            .get<Player>(`players/${id}`);
         return data;
     }
 
@@ -81,9 +82,9 @@ export class V1Client {
     async *teams(page: number = 0, amountPerPage: number = 30) {
         let currentPage = page;
         do {
-            const { data: { data, meta } } = await this._axios.get<BallDontLieResponse<Team[]>>('teams', {
+            const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Team[]>>('teams', {
                 params: {
-                    page,
+                    page: page++,
                     per_page: amountPerPage
                 }
             });
@@ -102,8 +103,11 @@ export class V1Client {
      * @memberof V1Client
      */
     async team(id: number) {
-        const { data: { data } } = await this._axios
-            .get<BallDontLieResponse<Team>>(`teams/${id.toString()}`);
+        if(typeof id !== 'number')
+            throw new Error('Team ID must be a number.');
+
+        const { data } = await this._axios
+            .get<Team>(`teams/${id}`);
         return data;
     }
 
