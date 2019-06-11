@@ -7,17 +7,30 @@ import { GameOptions } from "./game-options";
 
 function formatGameOptions(opts: GameOptions) {
     const fmt = (vals: Array<string | number>) => (prefix: string) => vals
-        .reduce<string>((acc, s) => `${acc}${prefix}[]=${s.toString()}&`, '')
-        .slice(0, -1);
+        .reduce<string>((acc, s) => `${acc}${prefix}[]=${s.toString()}&`, '');
 
-    return {
+    const arrOpts = {
         dates: opts.dates && fmt(opts.dates)('dates'),
         seasons: opts.seasons && fmt(opts.seasons)('seasons'),
-        team_ids: opts.teamIds && fmt(opts.teamIds)('team_ids'),
+        team_ids: opts.teamIds && fmt(opts.teamIds)('team_ids')
+    };
+
+    let paramStr = '';
+    for (const v of Object.values(arrOpts)) {
+        if(v !== undefined) 
+            paramStr += v;
+    }
+    const restOfOpts = {
         postseason: opts.postSeason,
         start_date: opts.startDate,
-        end_date: opts.endDate        
+        end_date: opts.endDate
     };
+
+    for(const [k, v] of Object.entries(restOfOpts)) {
+        if(v !== undefined)
+            paramStr += `${k}=${v}&`;
+    }
+    return paramStr.slice(0, -1);
 }
 
 /**
@@ -78,7 +91,7 @@ export class V1Client {
      * @memberof V1Client
      */
     async player(id: number) {
-        if(typeof id !== 'number')
+        if (typeof id !== 'number')
             throw new Error('Player ID must be a number.');
 
         const { data } = await this._axios
@@ -120,7 +133,7 @@ export class V1Client {
      * @memberof V1Client
      */
     async team(id: number) {
-        if(typeof id !== 'number')
+        if (typeof id !== 'number')
             throw new Error('Team ID must be a number.');
 
         const { data } = await this._axios
@@ -139,15 +152,36 @@ export class V1Client {
      * @memberof V1Client
      */
     async *games(page: number = 0, amountPerPage: number = 25, gameOptions?: GameOptions) {
+        if (gameOptions) {
+            yield* this._gamesWithOptions(page, amountPerPage, gameOptions);
+        } else {
+            yield* this._games(page, amountPerPage);
+        }
+    }
+    async *_games(page: number, amountPerPage: number) {
         let currentPage = page;
         do {
-            const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Game[]>>('games', {
-                params: {
-                    page: page++,
-                    per_page: amountPerPage,
-                    ... gameOptions && formatGameOptions(gameOptions)
-                },
-            });
+            const { data: { data, meta } } = await this
+                ._axios
+                .get<PaginatedResponse<Game[]>>('games', {
+                    params: {
+                        page: page++,
+                        per_page: amountPerPage
+                    },
+                });
+            yield data;
+            currentPage = meta.next_page;
+        } while (currentPage)
+
+    }
+    async *_gamesWithOptions(page: number, amountPerPage: number, gameOptions: GameOptions) {
+        let currentPage = page;
+
+        const url = `games?${formatGameOptions(gameOptions)}`;
+        do {
+            const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Game[]>>(
+                `${url}&page=${page++}&per_page=${amountPerPage}`
+            );
             yield data;
             currentPage = meta.next_page;
         } while (currentPage)
