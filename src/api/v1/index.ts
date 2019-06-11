@@ -91,11 +91,7 @@ export class V1Client {
      * @memberof V1Client
      */
     async player(id: number) {
-        if (typeof id !== 'number')
-            throw new Error('Player ID must be a number.');
-
-        const { data } = await this._axios
-            .get<Player>(`players/${id}`);
+        const { data } = await this._axios.get<Player>(`players/${id}`);
         return data;
     }
 
@@ -133,11 +129,7 @@ export class V1Client {
      * @memberof V1Client
      */
     async team(id: number) {
-        if (typeof id !== 'number')
-            throw new Error('Team ID must be a number.');
-
-        const { data } = await this._axios
-            .get<Team>(`teams/${id}`);
+        const { data } = await this._axios.get<Team>(`teams/${id}`);
         return data;
     }
 
@@ -186,4 +178,18 @@ export class V1Client {
             currentPage = meta.next_page;
         } while (currentPage)
     }
+
+    /**
+     * Gets a game from the API using its game ID.
+     *
+     * @param {number} id The ID associated with the game
+     * @returns {Promise<Game>}
+     * @memberof V1Client
+     */
+    async game(id: number) {
+        const { data } = await this._axios.get<Game>(`games/${id}`);
+        return data;
+    }
+
+
 }

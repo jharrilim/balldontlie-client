@@ -66,7 +66,7 @@ describe('BallDontLie API Test', () => {
     });
 
     describe('Games', () => {
-        it('can get games', async () => {
+        it('can get games with #games and get a single game with #game', async () => {
             const api = BallDontLie.v1();
 
             const g = (await api.games(0, 2).next()).value;
@@ -81,6 +81,16 @@ describe('BallDontLie API Test', () => {
             expect(g2[0].season).toBe(2018);
             expect(g2[1].season).toBe(2018);
             expect(g2[2].season).toBe(2018);
+
+            const { id, home_team, home_team_score, visitor_team, visitor_team_score } = g2[0];
+            const g3 = await api.game(id);
+
+            expect(g3).toBeDefined();
+            expect(g3.id).toEqual(id);
+            expect(g3.home_team.name).toBe(home_team.name);
+            expect(g3.home_team_score).toBe(home_team_score);
+            expect(g3.visitor_team.name).toBe(visitor_team.name);
+            expect(g3.visitor_team_score).toBe(visitor_team_score);
         });
     });
 });
