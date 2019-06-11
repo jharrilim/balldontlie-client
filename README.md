@@ -13,13 +13,13 @@ Javascript client for [Balldontlie](https://github.com/ynnadkrap/balldontlie). A
 
 ## API Implementation Status
 
-| API | Status |
-| --: | :-- |
-| [Players](https://www.balldontlie.io/#players) | ✅ |
-| [Teams](https://www.balldontlie.io/#teams) | ✅ |
-| [Games](https://www.balldontlie.io/#games) | 🚸 |
-| [Stats](https://www.balldontlie.io/#stats) | ❌ |
-| [Season Averages](https://www.balldontlie.io/#season-averages) | ❌ |
+|                                                            API | Status |
+| -------------------------------------------------------------: | :----- |
+|                 [Players](https://www.balldontlie.io/#players) | ✅      |
+|                     [Teams](https://www.balldontlie.io/#teams) | ✅      |
+|                     [Games](https://www.balldontlie.io/#games) | ✅      |
+|                     [Stats](https://www.balldontlie.io/#stats) | 🚸     |
+| [Season Averages](https://www.balldontlie.io/#season-averages) | ❌      |
 
 ## Install
 
