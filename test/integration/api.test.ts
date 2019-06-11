@@ -64,4 +64,23 @@ describe('BallDontLie API Test', () => {
             expect(team.id).toBe(id);
         });
     });
+
+    describe('Games', () => {
+        it('can get games', async () => {
+            const api = BallDontLie.v1();
+
+            const g = (await api.games(0, 2).next()).value;
+
+            expect(g).toBeDefined();
+            expect(g.length).toBe(2);
+
+            const g2 = (await api.games(0, 3, { seasons: [ 2018 ] }).next()).value;
+            
+            expect(g2).toBeDefined();
+            expect(g2.length).toBe(3);
+            expect(g2[0].season).toBe(2018);
+            expect(g2[1].season).toBe(2018);
+            expect(g2[2].season).toBe(2018);
+        });
+    });
 });

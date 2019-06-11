@@ -2,6 +2,23 @@ import Axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { PaginatedResponse } from "./paginated-response";
 import { Player } from "./player";
 import { Team } from "./team";
+import { Game } from "./game";
+import { GameOptions } from "./game-options";
+
+function formatGameOptions(opts: GameOptions) {
+    const fmt = (vals: Array<string | number>) => (prefix: string) => vals
+        .reduce<string>((acc, s) => `${acc}${prefix}[]=${s.toString()}&`, '')
+        .slice(0, -1);
+
+    return {
+        dates: opts.dates && fmt(opts.dates)('dates'),
+        seasons: opts.seasons && fmt(opts.seasons)('seasons'),
+        team_ids: opts.teamIds && fmt(opts.teamIds)('team_ids'),
+        postseason: opts.postSeason,
+        start_date: opts.startDate,
+        end_date: opts.endDate        
+    };
+}
 
 /**
  * A Client for the V1 API of balldontlie.
@@ -111,4 +128,28 @@ export class V1Client {
         return data;
     }
 
+    /**
+     * An async generator yielding games in a paginated fashion.
+     * 
+     * ##### Related: [Games](https://www.balldontlie.io/#get-all-games)
+     *
+     * @param {number} [page=0] The page to start paginating from. Defaults to 0.
+     * @param {number} [amountPerPage=25] The amount of games per page. Defaults to 25.
+     * @param {GameOptions} [gameOptions] An options object for filtering games.
+     * @memberof V1Client
+     */
+    async *games(page: number = 0, amountPerPage: number = 25, gameOptions?: GameOptions) {
+        let currentPage = page;
+        do {
+            const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Game[]>>('games', {
+                params: {
+                    page: page++,
+                    per_page: amountPerPage,
+                    ... gameOptions && formatGameOptions(gameOptions)
+                },
+            });
+            yield data;
+            currentPage = meta.next_page;
+        } while (currentPage)
+    }
 }

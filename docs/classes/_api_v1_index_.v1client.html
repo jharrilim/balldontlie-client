@@ -110,6 +110,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#games" class="tsd-kind-icon">games</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#player" class="tsd-kind-icon">player</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#players" class="tsd-kind-icon">players</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#team" class="tsd-kind-icon">team</a></li>
@@ -131,7 +132,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/bd5e4b3/src/api/v1/index.ts#L14">api/v1/index.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/df39101/src/api/v1/index.ts#L29">api/v1/index.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -153,13 +154,53 @@
 					<div class="tsd-signature tsd-kind-icon">_axios<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AxiosInstance</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/bd5e4b3/src/api/v1/index.ts#L14">api/v1/index.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/df39101/src/api/v1/index.ts#L29">api/v1/index.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="games" class="tsd-anchor"></a>
+					<h3>games</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">games<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, amountPerPage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, gameOptions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_api_v1_game_options_.gameoptions.html" class="tsd-signature-type">GameOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_game_.game.html" class="tsd-signature-type">Game</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/df39101/src/api/v1/index.ts#L141">api/v1/index.ts:141</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>An async generator yielding games in a paginated fashion.</p>
+								</div>
+								<h5 id="related-games">Related: <a href="https://www.balldontlie.io/#get-all-games">Games</a></h5>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>V1Client</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> page: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> amountPerPage: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;25</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> gameOptions: <a href="../interfaces/_api_v1_game_options_.gameoptions.html" class="tsd-signature-type">GameOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_game_.game.html" class="tsd-signature-type">Game</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="player" class="tsd-anchor"></a>
 					<h3>player</h3>
@@ -170,7 +211,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/bd5e4b3/src/api/v1/index.ts#L65">api/v1/index.ts:65</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/df39101/src/api/v1/index.ts#L80">api/v1/index.ts:80</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -208,7 +249,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/bd5e4b3/src/api/v1/index.ts#L40">api/v1/index.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/df39101/src/api/v1/index.ts#L55">api/v1/index.ts:55</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -218,7 +259,7 @@
 								<h5 id="related-players">Related: <a href="https://www.balldontlie.io/#get-all-players">Players</a></h5>
 								<dl class="tsd-comment-tags">
 									<dt>yields</dt>
-									<dd><p>{Promise&lt;Player[]&gt;} A promise containing a list of players</p>
+									<dd><p>{Promise&lt;Player[]&gt;} A promise containing a list of players.</p>
 									</dd>
 									<dt>memberof</dt>
 									<dd><p>V1Client</p>
@@ -251,7 +292,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/bd5e4b3/src/api/v1/index.ts#L103">api/v1/index.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/df39101/src/api/v1/index.ts#L122">api/v1/index.ts:122</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -283,13 +324,13 @@
 					<a name="teams" class="tsd-anchor"></a>
 					<h3>teams</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">teams<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, amountPerPage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_response_.balldontlieresponse.html" class="tsd-signature-type">BallDontLieResponse</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_team_.team.html" class="tsd-signature-type">Team</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">teams<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, amountPerPage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_team_.team.html" class="tsd-signature-type">Team</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/bd5e4b3/src/api/v1/index.ts#L80">api/v1/index.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/df39101/src/api/v1/index.ts#L99">api/v1/index.ts:99</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -298,6 +339,9 @@
 								</div>
 								<h5 id="related-teams">Related: <a href="https://www.balldontlie.io/#get-all-teams">Teams</a></h5>
 								<dl class="tsd-comment-tags">
+									<dt>yields</dt>
+									<dd><p>{Promise&lt;Team[]&gt;} A promise containing a list of teams.</p>
+									</dd>
 									<dt>memberof</dt>
 									<dd><p>V1Client</p>
 									</dd>
@@ -312,7 +356,7 @@
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> amountPerPage: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;30</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_response_.balldontlieresponse.html" class="tsd-signature-type">BallDontLieResponse</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_team_.team.html" class="tsd-signature-type">Team</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_team_.team.html" class="tsd-signature-type">Team</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -324,14 +368,20 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_api_v1_game_.html">"api/v1/game"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_api_v1_game_options_.html">"api/v1/game-<wbr>options"</a>
+					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="../modules/_api_v1_index_.html">"api/v1/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_api_v1_player_.html">"api/v1/player"</a>
+						<a href="../modules/_api_v1_paginated_response_.html">"api/v1/paginated-<wbr>response"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_api_v1_response_.html">"api/v1/response"</a>
+						<a href="../modules/_api_v1_player_.html">"api/v1/player"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_api_v1_team_.html">"api/v1/team"</a>
@@ -355,6 +405,9 @@
 								<a href="_api_v1_index_.v1client.html#_axios" class="tsd-kind-icon">_axios</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_api_v1_index_.v1client.html#games" class="tsd-kind-icon">games</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_api_v1_index_.v1client.html#player" class="tsd-kind-icon">player</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -370,6 +423,9 @@
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_api_v1_index_.html#formatgameoptions" class="tsd-kind-icon">format<wbr>Game<wbr>Options</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
