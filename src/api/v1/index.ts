@@ -4,33 +4,57 @@ import { Player } from "./player";
 import { Team } from "./team";
 import { Game } from "./game";
 import { GameOptions } from "./game-options";
+import { Stat } from "./stat";
+import { StatOptions } from "./stat-options";
 
-function formatGameOptions(opts: GameOptions) {
-    const fmt = (vals: Array<string | number>) => (prefix: string) => vals
-        .reduce<string>((acc, s) => `${acc}${prefix}[]=${s.toString()}&`, '');
+const fmtArrayParam = (vals: Array<string | number>) => (prefix: string) => vals
+    .reduce<string>((acc, s) => `${acc}${prefix}[]=${s.toString()}&`, '');
 
-    const arrOpts = {
-        dates: opts.dates && fmt(opts.dates)('dates'),
-        seasons: opts.seasons && fmt(opts.seasons)('seasons'),
-        team_ids: opts.teamIds && fmt(opts.teamIds)('team_ids')
-    };
-
+const mergeParamsWithArrayParams = <T>(params: T) => <V>(arrayParams: V) => {
     let paramStr = '';
-    for (const v of Object.values(arrOpts)) {
-        if(v !== undefined) 
+    for (const v of Object.values(arrayParams)) {
+        if (v !== undefined)
             paramStr += v;
     }
+    for (const [k, v] of Object.entries(params)) {
+        if (v !== undefined)
+            paramStr += `${k}=${v}&`;
+    }
+    return paramStr.slice(0, -1);
+};
+
+function formatStatOptions(opts: StatOptions) {
+    const arrOpts = {
+        dates: opts.dates && fmtArrayParam(opts.dates)('dates'),
+        seasons: opts.seasons && fmtArrayParam(opts.seasons)('seasons'),
+        player_ids: opts.playerIds && fmtArrayParam(opts.playerIds)('player_ids'),
+        game_ids: opts.gameIds && fmtArrayParam(opts.gameIds)('game_ids')
+    };
+
+    const restOfOpts = {
+        postseason: opts.postseason,
+        start_date: opts.startDate,
+        end_date: opts.endDate
+    };
+
+    return mergeParamsWithArrayParams(restOfOpts)(arrOpts);
+}
+
+function formatGameOptions(opts: GameOptions) {
+
+    const arrOpts = {
+        dates: opts.dates && fmtArrayParam(opts.dates)('dates'),
+        seasons: opts.seasons && fmtArrayParam(opts.seasons)('seasons'),
+        team_ids: opts.teamIds && fmtArrayParam(opts.teamIds)('team_ids')
+    };
+
     const restOfOpts = {
         postseason: opts.postSeason,
         start_date: opts.startDate,
         end_date: opts.endDate
     };
 
-    for(const [k, v] of Object.entries(restOfOpts)) {
-        if(v !== undefined)
-            paramStr += `${k}=${v}&`;
-    }
-    return paramStr.slice(0, -1);
+    return mergeParamsWithArrayParams(restOfOpts)(arrOpts);
 }
 
 /**
@@ -136,11 +160,14 @@ export class V1Client {
     /**
      * An async generator yielding games in a paginated fashion.
      * 
+     * Pre season games are not included. Games will update approximately every 10 minutes.
+     * 
      * ##### Related: [Games](https://www.balldontlie.io/#get-all-games)
      *
      * @param {number} [page=0] The page to start paginating from. Defaults to 0.
      * @param {number} [amountPerPage=25] The amount of games per page. Defaults to 25.
      * @param {GameOptions} [gameOptions] An options object for filtering games.
+     * @yields {Promise<Game[]>}
      * @memberof V1Client
      */
     async *games(page: number = 0, amountPerPage: number = 25, gameOptions?: GameOptions) {
@@ -150,6 +177,7 @@ export class V1Client {
             yield* this._games(page, amountPerPage);
         }
     }
+
     async *_games(page: number, amountPerPage: number) {
         let currentPage = page;
         do {
@@ -166,9 +194,9 @@ export class V1Client {
         } while (currentPage)
 
     }
+
     async *_gamesWithOptions(page: number, amountPerPage: number, gameOptions: GameOptions) {
         let currentPage = page;
-
         const url = `games?${formatGameOptions(gameOptions)}`;
         do {
             const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Game[]>>(
@@ -191,5 +219,39 @@ export class V1Client {
         return data;
     }
 
+    async *stats(page: number = 0, amountPerPage: number = 25, statOptions?: StatOptions) {
+        if (statOptions) {
+            yield* this._statsWithOptions(page, amountPerPage, statOptions);
+        } else {
+            yield* this._stats(page, amountPerPage);
+        }
+    }
 
+    async *_statsWithOptions(page: number, amountPerPage: number, statOptions: StatOptions) {
+        let currentPage = page;
+        const url = `stats?${formatStatOptions(statOptions)}`;
+        do {
+            const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Game[]>>(
+                `${url}&page=${page++}&per_page=${amountPerPage}`
+            );
+            yield data;
+            currentPage = meta.next_page;
+        } while (currentPage)
+    }
+
+    async *_stats(page: number, amountPerPage: number) {
+        let currentPage = page;
+        do {
+            const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Stat[]>>(
+                'stats', {
+                    params: {
+                        page: page++,
+                        per_page: amountPerPage
+                    }
+                }
+            );
+            yield data;
+            currentPage = meta.next_page;
+        } while (currentPage)
+    }
 }
