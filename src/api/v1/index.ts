@@ -6,6 +6,7 @@ import { Game } from "./game";
 import { GameOptions } from "./game-options";
 import { Stat } from "./stat";
 import { StatOptions } from "./stat-options";
+import { SeasonAverages } from "./season-averages";
 
 const fmtArrayParam = (vals: Array<string | number>) => (prefix: string) => vals
     .reduce<string>((acc, s) => `${acc}${prefix}[]=${s.toString()}&`, '');
@@ -177,8 +178,8 @@ export class V1Client {
     /**
      * Gets a game from the API using its game ID.
      *
-     * @param {number} id The ID associated with the game
-     * @returns {Promise<Game>}
+     * @param {number} id The ID associated with the game.
+     * @returns {Promise<Game>} A promise returning game data.
      * @memberof V1Client
      */
     async game(id: number) {
@@ -189,10 +190,10 @@ export class V1Client {
     /**
      * Gets game statistics. Updated approximately every 10 minutes.
      *
-     * @param {number} [page=0]
-     * @param {number} [amountPerPage=25]
-     * @param {StatOptions} [statOptions]
-     * @yields {Promise<Stat[]>}
+     * @param {number} [page=0] The page to start paginating from. Defaults to 0.
+     * @param {number} [amountPerPage=25] The amount of stats per page. Defaults to 25.
+     * @param {StatOptions} [statOptions] An options object for filtering statistics.
+     * @yields {Promise<Stat[]>} A promise containing statistics.
      * @memberof V1Client
      */
     async *stats(page: number = 0, amountPerPage: number = 25, statOptions?: StatOptions) {
@@ -202,6 +203,22 @@ export class V1Client {
         } else {
             yield* this._paginate<Stat>('stats', page, amountPerPage);
         }
+    }
+
+    /**
+     * Gets the season averages for the given players. Only regular seaason averages are available.
+     *
+     * @param {(string | number)} season The year of the season to get the averages for.
+     * @param {Array<string | number>} playerIds A list of player IDs to get the averages for.
+     * @returns {Promise<SeasonAverages[]>} A promise containing the season averages.
+     * @memberof V1Client
+     */
+    async seasonAverages(season: string | number, playerIds: Array<string | number>) {
+        const resp = await this._axios
+            .get<{ data: SeasonAverages[] }>(
+                `season_averages?season=${season}&${fmtArrayParam(playerIds)('player_ids')}`
+            );
+        return resp.data.data;
     }
 
 }

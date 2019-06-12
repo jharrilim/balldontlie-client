@@ -1,4 +1,5 @@
 import { BallDontLie, Team } from '../../src';
+import { SeasonAverages } from '../../src/api/v1/season-averages';
 
 describe('BallDontLie API Test', () => {
     describe('Players', () => {
@@ -74,8 +75,8 @@ describe('BallDontLie API Test', () => {
             expect(g).toBeDefined();
             expect(g.length).toBe(2);
 
-            const g2 = (await api.games(0, 3, { seasons: [ 2018 ] }).next()).value;
-            
+            const g2 = (await api.games(0, 3, { seasons: [2018] }).next()).value;
+
             expect(g2).toBeDefined();
             expect(g2.length).toBe(3);
             expect(g2[0].season).toBe(2018);
@@ -95,7 +96,7 @@ describe('BallDontLie API Test', () => {
     });
 
     describe('Stats', () => {
-        it('can get stats', async() => {
+        it('can get stats', async () => {
             const api = BallDontLie.v1();
 
             const stats = (await api.stats(0, 10, { playerIds: ['100', '120'] }).next()).value;
@@ -104,4 +105,16 @@ describe('BallDontLie API Test', () => {
             expect(stats[0].ast).toBeDefined();
         });
     });
+
+    describe('Season Averages', () => {
+        it('can get season averages', async () => {
+            const api = BallDontLie.v1();
+            const [player] = (await api.players(0, 1, 'kawhi').next()).value;
+
+            const [avgs] = await api.seasonAverages('2018', [ player.id ]);
+            console.log(JSON.stringify(avgs, null, 2));
+            expect(avgs).toBeDefined();
+            expect(avgs.player_id).toBe(player.id);
+        })
+    })
 });

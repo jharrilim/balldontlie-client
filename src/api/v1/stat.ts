@@ -29,4 +29,3 @@ export interface Stat {
     team:     Team;
     turnover: number;
 }
-

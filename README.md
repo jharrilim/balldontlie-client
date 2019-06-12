@@ -19,7 +19,7 @@ Javascript client for [Balldontlie](https://github.com/ynnadkrap/balldontlie). A
 |                     [Teams](https://www.balldontlie.io/#teams) | ✅      |
 |                     [Games](https://www.balldontlie.io/#games) | ✅      |
 |                     [Stats](https://www.balldontlie.io/#stats) | ✅    |
-| [Season Averages](https://www.balldontlie.io/#season-averages) | 🚸      |
+| [Season Averages](https://www.balldontlie.io/#season-averages) | ✅      |
 
 ## Install
 
