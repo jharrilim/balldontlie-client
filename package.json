@@ -8,7 +8,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
-    "docs": "typedoc --out docs src",
+    "docs": "typedoc --out docs src && touch docs/.nojekyll",
     "test": "jest"
   },
   "keywords": [
