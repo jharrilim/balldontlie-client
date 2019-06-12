@@ -40,3 +40,5 @@ void async function main() {
 
 }().catch(console.error);
 ```
+
+More examples can be found in the [tests](./test/integration/api.test.ts).
