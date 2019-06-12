@@ -112,7 +112,7 @@ describe('BallDontLie API Test', () => {
             const [player] = (await api.players(0, 1, 'kawhi').next()).value;
 
             const [avgs] = await api.seasonAverages('2018', [ player.id ]);
-            console.log(JSON.stringify(avgs, null, 2));
+            
             expect(avgs).toBeDefined();
             expect(avgs.player_id).toBe(player.id);
         })
