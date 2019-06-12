@@ -78,6 +78,22 @@ export class V1Client {
         }
     }
 
+    async *_paginate<T>(url: string, page: number, amountPerPage: number, params?: object) {
+        let currentPage = page;
+        do {
+            const { data: { data, meta } } = await this._axios
+                .get<PaginatedResponse<T[]>>(url, {
+                    params: {
+                        page: page++,
+                        per_page: amountPerPage,
+                        ...params
+                    }
+                });
+            yield data;
+            currentPage = meta.next_page;
+        } while (currentPage)
+    }
+
     /**
      * An async generator for yielding players in a paginated fashion.
      *
@@ -90,19 +106,7 @@ export class V1Client {
      * @memberof V1Client
      */
     async *players(page: number = 0, amountPerPage: number = 25, search?: string) {
-        let currentPage = page;
-        do {
-            const { data: { data, meta } } = await this._axios
-                .get<PaginatedResponse<Player[]>>('players', {
-                    params: {
-                        page: page++,
-                        per_page: amountPerPage,
-                        search
-                    }
-                });
-            yield data;
-            currentPage = meta.next_page;
-        } while (currentPage)
+        yield* this._paginate<Player>('players', page, amountPerPage, { search });
     }
 
     /**
@@ -130,17 +134,7 @@ export class V1Client {
      * @memberof V1Client
      */
     async *teams(page: number = 0, amountPerPage: number = 30) {
-        let currentPage = page;
-        do {
-            const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Team[]>>('teams', {
-                params: {
-                    page: page++,
-                    per_page: amountPerPage
-                }
-            });
-            yield data;
-            currentPage = meta.next_page;
-        } while (currentPage)
+        yield* this._paginate<Team>('teams', page, amountPerPage);
     }
 
     /**
@@ -172,39 +166,12 @@ export class V1Client {
      */
     async *games(page: number = 0, amountPerPage: number = 25, gameOptions?: GameOptions) {
         if (gameOptions) {
-            yield* this._gamesWithOptions(page, amountPerPage, gameOptions);
+            const url = `games?${formatGameOptions(gameOptions)}`;
+            yield* this._paginate<Game>(url, page, amountPerPage);
+
         } else {
-            yield* this._games(page, amountPerPage);
+            yield* this._paginate<Game>('games', page, amountPerPage);
         }
-    }
-
-    async *_games(page: number, amountPerPage: number) {
-        let currentPage = page;
-        do {
-            const { data: { data, meta } } = await this
-                ._axios
-                .get<PaginatedResponse<Game[]>>('games', {
-                    params: {
-                        page: page++,
-                        per_page: amountPerPage
-                    },
-                });
-            yield data;
-            currentPage = meta.next_page;
-        } while (currentPage)
-
-    }
-
-    async *_gamesWithOptions(page: number, amountPerPage: number, gameOptions: GameOptions) {
-        let currentPage = page;
-        const url = `games?${formatGameOptions(gameOptions)}`;
-        do {
-            const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Game[]>>(
-                `${url}&page=${page++}&per_page=${amountPerPage}`
-            );
-            yield data;
-            currentPage = meta.next_page;
-        } while (currentPage)
     }
 
     /**
@@ -219,39 +186,22 @@ export class V1Client {
         return data;
     }
 
+    /**
+     * Gets game statistics. Updated approximately every 10 minutes.
+     *
+     * @param {number} [page=0]
+     * @param {number} [amountPerPage=25]
+     * @param {StatOptions} [statOptions]
+     * @yields {Promise<Stat[]>}
+     * @memberof V1Client
+     */
     async *stats(page: number = 0, amountPerPage: number = 25, statOptions?: StatOptions) {
         if (statOptions) {
-            yield* this._statsWithOptions(page, amountPerPage, statOptions);
+            const url = `stats?${formatStatOptions(statOptions)}`;
+            yield* this._paginate<Stat>(url, page, amountPerPage);
         } else {
-            yield* this._stats(page, amountPerPage);
+            yield* this._paginate<Stat>('stats', page, amountPerPage);
         }
     }
 
-    async *_statsWithOptions(page: number, amountPerPage: number, statOptions: StatOptions) {
-        let currentPage = page;
-        const url = `stats?${formatStatOptions(statOptions)}`;
-        do {
-            const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Game[]>>(
-                `${url}&page=${page++}&per_page=${amountPerPage}`
-            );
-            yield data;
-            currentPage = meta.next_page;
-        } while (currentPage)
-    }
-
-    async *_stats(page: number, amountPerPage: number) {
-        let currentPage = page;
-        do {
-            const { data: { data, meta } } = await this._axios.get<PaginatedResponse<Stat[]>>(
-                'stats', {
-                    params: {
-                        page: page++,
-                        per_page: amountPerPage
-                    }
-                }
-            );
-            yield data;
-            currentPage = meta.next_page;
-        } while (currentPage)
-    }
 }

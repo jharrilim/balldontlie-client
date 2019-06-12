@@ -110,12 +110,12 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#_games" class="tsd-kind-icon">_games</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#_gameswithoptions" class="tsd-kind-icon">_games<wbr>With<wbr>Options</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="_api_v1_index_.v1client.html#_paginate" class="tsd-kind-icon">_paginate</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#game" class="tsd-kind-icon">game</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#games" class="tsd-kind-icon">games</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#player" class="tsd-kind-icon">player</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#players" class="tsd-kind-icon">players</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#stats" class="tsd-kind-icon">stats</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#team" class="tsd-kind-icon">team</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_v1_index_.v1client.html#teams" class="tsd-kind-icon">teams</a></li>
 							</ul>
@@ -135,7 +135,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/ac9ffdc/src/api/v1/index.ts#L42">api/v1/index.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/baf3bcb/src/api/v1/index.ts#L66">api/v1/index.ts:66</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -157,54 +157,37 @@
 					<div class="tsd-signature tsd-kind-icon">_axios<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AxiosInstance</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/ac9ffdc/src/api/v1/index.ts#L42">api/v1/index.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/baf3bcb/src/api/v1/index.ts#L66">api/v1/index.ts:66</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="_games" class="tsd-anchor"></a>
-					<h3>_games</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">_games<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, amountPerPage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_game_.game.html" class="tsd-signature-type">Game</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="_paginate" class="tsd-anchor"></a>
+					<h3>_paginate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">_paginate&lt;T&gt;<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, amountPerPage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, params<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/ac9ffdc/src/api/v1/index.ts#L153">api/v1/index.ts:153</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/baf3bcb/src/api/v1/index.ts#L81">api/v1/index.ts:81</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
 								<li>
-									<h5>page: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>amountPerPage: <span class="tsd-signature-type">number</span></h5>
+									<h4>T</h4>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_game_.game.html" class="tsd-signature-type">Game</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="_gameswithoptions" class="tsd-anchor"></a>
-					<h3>_games<wbr>With<wbr>Options</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">_games<wbr>With<wbr>Options<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, amountPerPage<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, gameOptions<span class="tsd-signature-symbol">: </span><a href="../interfaces/_api_v1_game_options_.gameoptions.html" class="tsd-signature-type">GameOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_game_.game.html" class="tsd-signature-type">Game</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/ac9ffdc/src/api/v1/index.ts#L169">api/v1/index.ts:169</a></li>
-								</ul>
-							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>url: <span class="tsd-signature-type">string</span></h5>
+								</li>
 								<li>
 									<h5>page: <span class="tsd-signature-type">number</span></h5>
 								</li>
@@ -212,10 +195,10 @@
 									<h5>amountPerPage: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
-									<h5>gameOptions: <a href="../interfaces/_api_v1_game_options_.gameoptions.html" class="tsd-signature-type">GameOptions</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> params: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_game_.game.html" class="tsd-signature-type">Game</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -229,7 +212,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/ac9ffdc/src/api/v1/index.ts#L189">api/v1/index.ts:189</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/baf3bcb/src/api/v1/index.ts#L184">api/v1/index.ts:184</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -265,15 +248,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/ac9ffdc/src/api/v1/index.ts#L146">api/v1/index.ts:146</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/baf3bcb/src/api/v1/index.ts#L167">api/v1/index.ts:167</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>An async generator yielding games in a paginated fashion.</p>
 								</div>
+								<p>Pre season games are not included. Games will update approximately every 10 minutes.</p>
 								<h5 id="related-games">Related: <a href="https://www.balldontlie.io/#get-all-games">Games</a></h5>
 								<dl class="tsd-comment-tags">
+									<dt>yields</dt>
+									<dd><p>{Promise&lt;Game[]&gt;}</p>
+									</dd>
 									<dt>memberof</dt>
 									<dd><p>V1Client</p>
 									</dd>
@@ -305,7 +292,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/ac9ffdc/src/api/v1/index.ts#L93">api/v1/index.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/baf3bcb/src/api/v1/index.ts#L121">api/v1/index.ts:121</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -343,7 +330,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/ac9ffdc/src/api/v1/index.ts#L68">api/v1/index.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/baf3bcb/src/api/v1/index.ts#L108">api/v1/index.ts:108</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -377,6 +364,48 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="stats" class="tsd-anchor"></a>
+					<h3>stats</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">stats<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, amountPerPage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, statOptions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_api_v1_stat_options_.statoptions.html" class="tsd-signature-type">StatOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_stat_.stat.html" class="tsd-signature-type">Stat</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/baf3bcb/src/api/v1/index.ts#L198">api/v1/index.ts:198</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets game statistics. Updated approximately every 10 minutes.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>yields</dt>
+									<dd><p>{Promise&lt;Stat[]&gt;}</p>
+									</dd>
+									<dt>memberof</dt>
+									<dd><p>V1Client</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> page: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> amountPerPage: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;25</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> statOptions: <a href="../interfaces/_api_v1_stat_options_.statoptions.html" class="tsd-signature-type">StatOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_api_v1_stat_.stat.html" class="tsd-signature-type">Stat</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="team" class="tsd-anchor"></a>
 					<h3>team</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -386,7 +415,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/ac9ffdc/src/api/v1/index.ts#L131">api/v1/index.ts:131</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/baf3bcb/src/api/v1/index.ts#L149">api/v1/index.ts:149</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -424,7 +453,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/ac9ffdc/src/api/v1/index.ts#L108">api/v1/index.ts:108</a></li>
+									<li>Defined in <a href="https://github.com/jharrilim/balldontlie-client/blob/baf3bcb/src/api/v1/index.ts#L136">api/v1/index.ts:136</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -478,6 +507,12 @@
 						<a href="../modules/_api_v1_player_.html">"api/v1/player"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_api_v1_stat_.html">"api/v1/stat"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_api_v1_stat_options_.html">"api/v1/stat-<wbr>options"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_api_v1_team_.html">"api/v1/team"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -498,11 +533,8 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_api_v1_index_.v1client.html#_axios" class="tsd-kind-icon">_axios</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_api_v1_index_.v1client.html#_games" class="tsd-kind-icon">_games</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_api_v1_index_.v1client.html#_gameswithoptions" class="tsd-kind-icon">_games<wbr>With<wbr>Options</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="_api_v1_index_.v1client.html#_paginate" class="tsd-kind-icon">_paginate</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_api_v1_index_.v1client.html#game" class="tsd-kind-icon">game</a>
@@ -517,6 +549,9 @@
 								<a href="_api_v1_index_.v1client.html#players" class="tsd-kind-icon">players</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_api_v1_index_.v1client.html#stats" class="tsd-kind-icon">stats</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_api_v1_index_.v1client.html#team" class="tsd-kind-icon">team</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -527,7 +562,16 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_api_v1_index_.html#fmtarrayparam" class="tsd-kind-icon">fmt<wbr>Array<wbr>Param</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="../modules/_api_v1_index_.html#formatgameoptions" class="tsd-kind-icon">format<wbr>Game<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_api_v1_index_.html#formatstatoptions" class="tsd-kind-icon">format<wbr>Stat<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/_api_v1_index_.html#mergeparamswitharrayparams" class="tsd-kind-icon">merge<wbr>Params<wbr>With<wbr>Array<wbr>Params</a>
 					</li>
 				</ul>
 			</nav>

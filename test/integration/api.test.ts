@@ -93,4 +93,15 @@ describe('BallDontLie API Test', () => {
             expect(g3.visitor_team_score).toBe(visitor_team_score);
         });
     });
+
+    describe('Stats', () => {
+        it('can get stats', async() => {
+            const api = BallDontLie.v1();
+
+            const stats = (await api.stats(0, 10, { playerIds: ['100', '120'] }).next()).value;
+
+            expect(stats).toBeDefined();
+            expect(stats[0].ast).toBeDefined();
+        });
+    });
 });
