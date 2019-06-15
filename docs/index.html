@@ -126,11 +126,14 @@
 
 <span class="hljs-keyword">void</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">const</span> v1Client = BallDontLie.v1();
-    <span class="hljs-keyword">const</span> teamGenerator = v1Client.teams(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+    <span class="hljs-keyword">const</span> teamGenerator = v1Client.teams(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">// starting from 0, 10 per page</span>
+
     <span class="hljs-keyword">const</span> teams1 = (<span class="hljs-keyword">await</span> teamGenerator.next()).value; <span class="hljs-comment">// get the first 10 teams</span>
     teams1.forEach(<span class="hljs-function"><span class="hljs-params">team</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(team.full_name));
+
     <span class="hljs-keyword">const</span> teams2 = (<span class="hljs-keyword">await</span> teamGenerator.next()).value; <span class="hljs-comment">// get the next 10 teams after the first 10</span>
     teams2.forEach(<span class="hljs-function"><span class="hljs-params">team</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(team.full_name));
+
 }().catch(<span class="hljs-built_in">console</span>.error);</code></pre>
 				<p>More examples can be found in the <a href="./test/integration/api.test.ts">tests</a>.</p>
 			</div>

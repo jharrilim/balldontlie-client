@@ -62,11 +62,14 @@ import { BallDontLie } from '@jharrilim/balldontlie-client';
 
 void async function main() {
     const v1Client = BallDontLie.v1();
-    const teamGenerator = v1Client.teams(0, 10);
+    const teamGenerator = v1Client.teams(0, 10); // starting from 0, 10 per page
+    
     const teams1 = (await teamGenerator.next()).value; // get the first 10 teams
     teams1.forEach(team => console.log(team.full_name));
+
     const teams2 = (await teamGenerator.next()).value; // get the next 10 teams after the first 10
     teams2.forEach(team => console.log(team.full_name));
+
 }().catch(console.error);
 ```
 
