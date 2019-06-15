@@ -67,7 +67,8 @@
 				<h1 id="balldontlie-client">balldontlie-client</h1>
 				<p><a href="https://dev.azure.com/josephharrisonlim/josephharrisonlim/_build/latest?definitionId=2&amp;branchName=master"><img src="https://dev.azure.com/josephharrisonlim/josephharrisonlim/_apis/build/status/jharrilim.balldontlie-client?branchName=master" alt="Build Status"></a>
 				<a href="https://www.npmjs.com/package/@jharrilim/balldontlie-client"><img src="https://img.shields.io/npm/v/@jharrilim/balldontlie-client.svg" alt="NPM Badge"></a></p>
-				<p>Javascript client for <a href="https://github.com/ynnadkrap/balldontlie">Balldontlie</a>. API Docs found <a href="https://jharrilim.github.io/balldontlie-client">here</a>.</p>
+				<p>Javascript client for <a href="https://github.com/ynnadkrap/balldontlie">Balldontlie</a>. </p>
+				<p>API Docs for this client can be found <a href="https://jharrilim.github.io/balldontlie-client/classes/_api_v1_index_.v1client.html">here</a>.</p>
 				<p><img src="https://media.giphy.com/media/Jm2hosNfVeNjy/giphy.gif" alt="Rasheed Wallace - Ball Dont Lie"></p>
 				<h2 id="api-implementation-status">API Implementation Status</h2>
 				<table>
@@ -101,15 +102,34 @@
 				<h2 id="install">Install</h2>
 				<pre><code class="language-sh">npm i @jharrilim/balldontlie-client</code></pre>
 				<h2 id="usage">Usage</h2>
+				<p>This library uses async generators for handling pagination. You may use this in conjunction with
+					<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of">for-await-of</a>
+				to make multiple API requests. You may also request for one page at a time by awaiting <code>.next()</code>.</p>
+				<p>Axios is used interally, and axios configuration options may be passed into <code>.v1()</code> if needed.</p>
+				<blockquote>
+					<p>Warning: This API is rate limited. You may only make up to <a href="http://www.balldontlie.io/#getting-started">60 requests per minute</a>.</p>
+				</blockquote>
+				<h3 id="example-with-for-await-of">Example with for-await-of</h3>
 				<pre><code class="language-js"><span class="hljs-keyword">import</span> { BallDontLie } <span class="hljs-keyword">from</span> <span class="hljs-string">'@jharrilim/balldontlie-client'</span>;
 
 <span class="hljs-keyword">void</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">const</span> v1Client = BallDontLie.v1();
-    <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span>(<span class="hljs-keyword">let</span> team <span class="hljs-keyword">of</span> v1Client.teams()) {
-        <span class="hljs-built_in">console</span>.log(team.full_name);
+    <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span>(<span class="hljs-keyword">const</span> teams <span class="hljs-keyword">of</span> v1Client.teams(<span class="hljs-number">0</span>)) {
+        <span class="hljs-comment">// paginate through all the teams</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">const</span> team <span class="hljs-keyword">of</span> teams) {
+            <span class="hljs-built_in">console</span>.log(team.full_name);
+        }
     }
-
 }().catch(<span class="hljs-built_in">console</span>.error);</code></pre>
+				<h3 id="example-with-next-">Example with .next()</h3>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { BallDontLie } <span class="hljs-keyword">from</span> <span class="hljs-string">'@jharrilim/balldontlie-client'</span>;
+
+<span class="hljs-keyword">void</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> v1Client = BallDontLie.v1();
+    <span class="hljs-keyword">const</span> teams = (<span class="hljs-keyword">await</span> v1Client.teams(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>).next()).value; <span class="hljs-comment">// get the first 10 teams</span>
+    teams.forEach(<span class="hljs-function"><span class="hljs-params">team</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(team.full_name));
+}().catch(<span class="hljs-built_in">console</span>.error);</code></pre>
+				<p>More examples can be found in the <a href="./test/integration/api.test.ts">tests</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
