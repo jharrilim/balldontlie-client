@@ -5,14 +5,21 @@ describe('BallDontLie API Test', () => {
     describe('Players', () => {
         it('can get players', async () => {
             const api = BallDontLie.v1();
+            const players = await api.players(0, 3);
+            const player1Response = await players.next(); // First 3 players
+            const player2Response = await players.next(); // Second 3 players
 
-            const player1 = (await api.players(0, 1).next()).value;
-            const player2 = (await api.players(0, 3).next()).value;
+            if (player1Response.done || player2Response.done) {
+                throw Error('Expected a response when calling the players API');
+            }
+
+            const player1 = player1Response.value;
+            const player2 = player2Response.value;
 
             expect(player1).toBeDefined();
             expect(player2).toBeDefined();
             expect(player1).toBeInstanceOf(Array);
-            expect(player1.length).toBe(1);
+            expect(player1.length).toBe(3);
             expect(player2).toBeInstanceOf(Array);
             expect(player2.length).toBe(3);
         });
@@ -20,6 +27,9 @@ describe('BallDontLie API Test', () => {
         it('can get player by id', async () => {
             const api = BallDontLie.v1();
             const players = await api.players(5, 1).next();
+            if (players.done) {
+                throw Error('Expected a response when calling the players API');
+            }
 
             expect(players.value).toBeDefined();
             expect(players.value.length).toBe(1);
@@ -51,18 +61,22 @@ describe('BallDontLie API Test', () => {
         it('can get team by id', async () => {
             const api = BallDontLie.v1();
 
-            const t = (await api.teams(0, 1).next()).value;
+            const teamResponse = (await api.teams(0, 1).next());
+            if (teamResponse.done) {
+                throw Error('Expected teams');
+            }
 
-            expect(t).toBeDefined();
-            expect(t.length).toBe(1);
+            const team = teamResponse.value;
+            expect(team).toBeDefined();
+            expect(team.length).toBe(1);
 
-            const id = t[0].id;
+            const id = team[0].id;
             expect(id).toBeDefined();
 
-            const team = await api.team(id);
+            const teamById = await api.team(id);
 
-            expect(team).toBeDefined();
-            expect(team.id).toBe(id);
+            expect(teamById).toBeDefined();
+            expect(teamById.id).toBe(id);
         });
     });
 
@@ -70,20 +84,27 @@ describe('BallDontLie API Test', () => {
         it('can get games with #games and get a single game with #game', async () => {
             const api = BallDontLie.v1();
 
-            const g = (await api.games(0, 2).next()).value;
+            const gamesResponse = await api.games(0, 2).next();
+            if (gamesResponse.done) {
+                throw Error('Expected to get games from Games API');
+            }
+            const games1 = gamesResponse.value;
+            expect(games1).toBeDefined();
+            expect(games1.length).toBe(2);
 
-            expect(g).toBeDefined();
-            expect(g.length).toBe(2);
+            const gamesResponse2 = await api.games(0, 3, { seasons: [2018] }).next();
+            if (gamesResponse2.done) {
+                throw Error('Expected to get games from Games API');
+            }
+            const games2 = gamesResponse2.value;
 
-            const g2 = (await api.games(0, 3, { seasons: [2018] }).next()).value;
+            expect(games2).toBeDefined();
+            expect(games2.length).toBe(3);
+            expect(games2[0].season).toBe(2018);
+            expect(games2[1].season).toBe(2018);
+            expect(games2[2].season).toBe(2018);
 
-            expect(g2).toBeDefined();
-            expect(g2.length).toBe(3);
-            expect(g2[0].season).toBe(2018);
-            expect(g2[1].season).toBe(2018);
-            expect(g2[2].season).toBe(2018);
-
-            const { id, home_team, home_team_score, visitor_team, visitor_team_score } = g2[0];
+            const { id, home_team, home_team_score, visitor_team, visitor_team_score } = games2[0];
             const g3 = await api.game(id);
 
             expect(g3).toBeDefined();
@@ -99,20 +120,26 @@ describe('BallDontLie API Test', () => {
         it('can get stats', async () => {
             const api = BallDontLie.v1();
 
-            const stats = (await api.stats(0, 10, { playerIds: ['100', '120'] }).next()).value;
+            const stats = await api.stats(0, 10, { playerIds: ['100', '120'] }).next();
+            if (stats.done) {
+                throw Error('Expected to get stats from Stats API');
+            }
 
-            expect(stats).toBeDefined();
-            expect(stats[0].ast).toBeDefined();
+            expect(stats.value).toBeDefined();
+            expect(stats.value[0].ast).toBeDefined();
         });
     });
 
     describe('Season Averages', () => {
         it('can get season averages', async () => {
             const api = BallDontLie.v1();
-            const [player] = (await api.players(0, 1, 'kawhi').next()).value;
+            const averagesResponse = await api.players(0, 1, 'kawhi').next();
+            if (averagesResponse.done) {
+                throw Error('Expected to get season averages from Season Averages API');
+            }
+            const [player] = averagesResponse.value;
+            const [avgs] = await api.seasonAverages('2018', [player.id]);
 
-            const [avgs] = await api.seasonAverages('2018', [ player.id ]);
-            
             expect(avgs).toBeDefined();
             expect(avgs.player_id).toBe(player.id);
         })
